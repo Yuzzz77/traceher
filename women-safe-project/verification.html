@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TraceHer 卫溯 | 产品溯源验证</title>
+    <meta
+      name="description"
+      content="TraceHer 卫溯产品溯源验证演示页，展示产品批次、检测报告、安全评级、国家标准与企业认证状态。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="verification-body">
+    <div class="verify-shell">
+      <header class="verify-header" data-reveal>
+        <a class="brand" href="index.html" aria-label="Back to TraceHer home">
+          <span class="brand-mark"></span>
+          <span>TraceHer <em>卫溯</em></span>
+        </a>
+        <div class="verify-header-status">
+          <span class="status-dot"></span>
+          <span>Scan session TH-2026-0519</span>
+        </div>
+      </header>
+
+      <main class="verify-main">
+        <section class="verify-hero" aria-labelledby="verify-title">
+          <div class="verify-intro" data-reveal>
+            <p class="eyebrow">Product Traceability Verification</p>
+            <h1 id="verify-title">产品溯源验证</h1>
+            <p>
+              模拟扫码成功后的真实产品系统界面，展示来源、批次、检测、评级与认证状态。
+            </p>
+          </div>
+
+          <div class="scan-success-card" data-reveal>
+            <div class="success-orbit">
+              <span></span>
+              <strong>✓</strong>
+            </div>
+            <div>
+              <span>扫码成功</span>
+              <strong>产品身份已匹配</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="verify-dashboard">
+          <aside class="product-identity glass-panel" data-reveal>
+            <div class="identity-top">
+              <span class="identity-chip">Verified Product</span>
+              <div class="mini-code" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+
+            <h2>TraceHer Pure Cotton Care Pad</h2>
+            <p>240mm 日用型 · 有机棉亲肤表层 · 无荧光剂检出</p>
+
+            <dl class="identity-list">
+              <div>
+                <dt>产品批次号</dt>
+                <dd>TH-0827-A3</dd>
+              </div>
+              <div>
+                <dt>生产日期</dt>
+                <dd>2026-04-28</dd>
+              </div>
+              <div>
+                <dt>工厂信息</dt>
+                <dd>TraceHer GMP A3 智能产线 · 浙江湖州</dd>
+              </div>
+              <div>
+                <dt>原材料来源</dt>
+                <dd>新疆有机棉基地 · 批次 OC-4192</dd>
+              </div>
+            </dl>
+          </aside>
+
+          <section class="rating-card glass-panel" data-reveal data-tilt>
+            <div class="rating-glow"></div>
+            <div class="rating-loader" data-rating-loader>
+              <span></span>
+              <em>AI safety model loading</em>
+            </div>
+            <div class="rating-result">
+              <span>AI 安全评级</span>
+              <strong>A级</strong>
+              <p>安全可信</p>
+            </div>
+            <div class="rating-metrics">
+              <div>
+                <span data-count="98">0</span>
+                <small>综合安全分</small>
+              </div>
+              <div>
+                <span data-count="0">0</span>
+                <small>高风险项</small>
+              </div>
+              <div>
+                <span data-count="100" data-count-suffix="%">0%</span>
+                <small>批次匹配</small>
+              </div>
+            </div>
+          </section>
+
+          <aside class="standards-panel glass-panel" data-reveal>
+            <div class="panel-title">
+              <span class="pulse-dot"></span>
+              <strong>合规与认证</strong>
+            </div>
+            <div class="standard-pass">
+              <span>国家标准</span>
+              <strong>已通过 GB/T 8939-2018</strong>
+            </div>
+            <div class="cert-grid">
+              <span>ISO 9001</span>
+              <span>GMP Clean Line</span>
+              <span>CNAS Lab</span>
+              <span>Organic Cotton</span>
+            </div>
+            <div class="enterprise-state">
+              <span>企业认证状态</span>
+              <strong>认证有效 · 年审通过</strong>
+            </div>
+          </aside>
+        </section>
+
+        <section class="risk-warning glass-panel" data-reveal>
+          <div class="risk-aura"></div>
+          <div class="risk-head">
+            <div class="risk-icon" aria-hidden="true">
+              <span></span>
+              <strong>!</strong>
+            </div>
+            <div>
+              <p class="eyebrow">Risk Early Warning</p>
+              <h2>风险预警</h2>
+              <p>
+                系统检测到该批次存在轻度异常信号，当前不代表产品必然不合格，但建议品牌方与用户关注以下信息。
+              </p>
+            </div>
+            <div class="risk-level">
+              <span>风险等级</span>
+              <strong>中低</strong>
+            </div>
+          </div>
+
+          <div class="risk-grid">
+            <article class="risk-item">
+              <span>01</span>
+              <strong>检测到异常漂白剂残留</strong>
+              <p>残留读数接近企业内控阈值，但仍低于国家标准限值。</p>
+            </article>
+            <article class="risk-item">
+              <span>02</span>
+              <strong>该批次存在用户投诉记录</strong>
+              <p>近 7 日内收到 3 条关于气味与皮肤不适的售后反馈。</p>
+            </article>
+          </div>
+
+          <div class="ai-advice">
+            <div>
+              <span>AI 分析提示</span>
+              <p>
+                异常信号主要集中在同一物流温湿度区间，建议复核仓储环境与抽检样本，并持续观察用户反馈趋势。
+              </p>
+            </div>
+            <div>
+              <span>安全建议</span>
+              <p>
+                敏感肌用户建议暂停使用该批次；品牌方建议启动补充抽检，并在 24 小时内更新复核结果。
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="verify-details">
+          <article class="test-results glass-panel" data-reveal>
+            <div class="panel-title">
+              <span class="pulse-dot"></span>
+              <strong>安全检测结果</strong>
+            </div>
+            <div class="result-row">
+              <span>荧光增白剂</span>
+              <strong>未检出</strong>
+            </div>
+            <div class="result-row">
+              <span>微生物指标</span>
+              <strong>符合标准</strong>
+            </div>
+            <div class="result-row">
+              <span>甲醛残留</span>
+              <strong>低于检出限</strong>
+            </div>
+            <div class="result-row">
+              <span>皮肤刺激性</span>
+              <strong>低风险</strong>
+            </div>
+          </article>
+
+          <article class="timeline-panel glass-panel" data-reveal>
+            <div class="panel-title">
+              <span class="pulse-dot"></span>
+              <strong>检测时间轴</strong>
+            </div>
+            <div class="verify-timeline">
+              <div>
+                <time>2026-04-28 09:20</time>
+                <strong>生产线封装完成</strong>
+                <p>GMP A3 产线完成批次封装并生成追踪码。</p>
+              </div>
+              <div>
+                <time>2026-04-29 14:10</time>
+                <strong>第三方实验室检测</strong>
+                <p>微生物、荧光剂、甲醛与刺激性指标检测完成。</p>
+              </div>
+              <div>
+                <time>2026-04-30 16:45</time>
+                <strong>AI 安全评级生成</strong>
+                <p>模型合并批次、报告与历史风险数据，输出 A 级。</p>
+              </div>
+              <div>
+                <time>2026-05-19 09:41</time>
+                <strong>用户扫码验证成功</strong>
+                <p>产品身份、检测报告哈希与企业认证状态均已匹配。</p>
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
