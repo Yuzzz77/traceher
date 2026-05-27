@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum QrStatus {
+  ACTIVE
+  INACTIVE
+  FROZEN
+}
+
+enum BatchStatus {
+  VERIFIED
+  UNVERIFIED
+  RISK
+}
+
+enum ReportStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ResultLevel {
+  PASS
+  WARNING
+  FAIL
+}
+
+model QrCode {
+  id             Int          @id @default(autoincrement())
+  code           String       @unique @db.VarChar(100)
+  productBatchId Int          @unique @map("product_batch_id")
+  status         QrStatus     @default(INACTIVE)
+  activatedAt    DateTime?    @map("activated_at")
+  scanCount      Int          @default(0) @map("scan_count")
+  firstScannedAt DateTime?    @map("first_scanned_at")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+
+  productBatch ProductBatch @relation(fields: [productBatchId], references: [id], onDelete: Cascade)
+
+  @@map("qr_code")
+  @@index([status])
+}
+
+model ProductBatch {
+  id             Int                 @id @default(autoincrement())
+  batchNo        String              @unique @map("batch_no") @db.VarChar(50)
+  productName    String              @map("product_name") @db.VarChar(120)
+  productionDate DateTime            @map("production_date") @db.Date
+  status         BatchStatus         @default(UNVERIFIED) @map("batch_status")
+  createdAt      DateTime            @default(now()) @map("created_at")
+  updatedAt      DateTime            @updatedAt @map("updated_at")
+
+  qrCode            QrCode?
+  batchMaterials     BatchMaterialRel[]
+  inspectionReports  InspectionReport[]
+
+  @@map("product_batch")
+  @@index([status])
+}
+
+model RawMaterialBatch {
+  id           Int                @id @default(autoincrement())
+  batchNo      String             @unique @map("batch_no") @db.VarChar(50)
+  materialName String             @map("material_name") @db.VarChar(120)
+  materialType String             @map("material_type") @db.VarChar(60)
+  createdAt    DateTime           @default(now()) @map("created_at")
+  updatedAt    DateTime           @updatedAt @map("updated_at")
+
+  batchMaterials BatchMaterialRel[]
+
+  @@map("raw_material_batch")
+}
+
+model BatchMaterialRel {
+  id                Int             @id @default(autoincrement())
+  productBatchId    Int             @map("product_batch_id")
+  rawMaterialBatchId Int             @map("raw_material_batch_id")
+  usageRatio        Decimal         @map("usage_ratio") @db.Decimal(5, 2)
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+
+  productBatch      ProductBatch    @relation(fields: [productBatchId], references: [id], onDelete: Cascade)
+  rawMaterialBatch  RawMaterialBatch @relation(fields: [rawMaterialBatchId], references: [id], onDelete: Cascade)
+
+  @@unique([productBatchId, rawMaterialBatchId])
+  @@map("batch_material_rel")
+  @@index([rawMaterialBatchId])
+}
+
+model InspectionReport {
+  id             Int             @id @default(autoincrement())
+  reportNo       String          @unique @map("report_no") @db.VarChar(50)
+  productBatchId Int             @map("product_batch_id")
+  reportStatus   ReportStatus    @default(PENDING) @map("report_status")
+  inspectedAt    DateTime?       @map("inspected_at")
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+
+  productBatch      ProductBatch      @relation(fields: [productBatchId], references: [id], onDelete: Cascade)
+  inspectionResults InspectionResult[]
+
+  @@map("inspection_report")
+  @@index([productBatchId, reportStatus])
+}
+
+model InspectionResult {
+  id            Int           @id @default(autoincrement())
+  reportId      Int           @map("report_id")
+  itemName      String        @map("item_name") @db.VarChar(80)
+  resultValue   String        @map("result_value") @db.VarChar(80)
+  resultLevel   ResultLevel   @map("result_level")
+  standardRange String        @map("standard_range") @db.VarChar(80)
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  report InspectionReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@map("inspection_result")
+  @@index([reportId, resultLevel])
+}
